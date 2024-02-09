@@ -40,7 +40,7 @@ app.get("/todos", async (req, res) => {
   res.json({todos});
 });
 
-app.put("/completed", async (req, res) => {
+app.patch("/completed", async (req, res) => {
   const updatePayLoad = req.body;
   const parsedPayLoad = updateTodo.safeParse(updatePayLoad);
   if (!parsedPayLoad.success) {
