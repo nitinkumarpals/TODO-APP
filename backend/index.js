@@ -1,10 +1,15 @@
 import express from "express";
 import { createTodo, updateTodo } from "./types.js";
 import { todo } from "./db.js"
+import cors from "cors"
+
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors({
+  origin: "http://localhost:5173",
+}));
 
 app.get("/", (req, res) => {
   res.send("hello world");
@@ -44,11 +49,11 @@ app.put("/completed", async (req, res) => {
     });
     return;
   }
-  await todo.updateOne({
-    _id: req.body.id,
-  },{
-     completed: true 
-     })
+  await todo.updateOne(
+    { _id: req.body.id },
+      { $set: { completed: true } }
+  )
+
   res.json({
     message: "Todo marked as completed"
   })

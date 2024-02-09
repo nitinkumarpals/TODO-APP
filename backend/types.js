@@ -6,7 +6,5 @@ export const createTodo = zod.object({
 })
 
 export const updateTodo = zod.object({
-    _id: zod.string(),
-    title: zod.string().optional(),
-    description: zod.string().optional()
+    id: zod.string(),
 })
